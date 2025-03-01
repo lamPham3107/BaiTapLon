@@ -7,19 +7,30 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.fruit_store.ui.home.HomeFragment"
+        android:name="com.example.fruit_store.ui.Home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.fruit_store.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_profile"
+        android:name="com.example.fruit_store.ui.Profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.fruit_store.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_warehouse"
+        android:name="com.example.fruit_store.ui.Warehouse.WarehouseFragment"
+        android:label="@string/warehouse"
+        tools:layout="@layout/fragment_warehouse" />
+    <fragment
+        android:id="@+id/nav_revenue"
+        android:name="com.example.fruit_store.ui.Revenue.RevenueFragment"
+        android:label="@string/revenue"
+        tools:layout="@layout/fragment_revenue" />
+    <fragment
+        android:id="@+id/nav_my_order"
+        android:name="com.example.fruit_store.ui.MyOrder.MyOrderFragment"
+        android:label="@string/my_order"
+        tools:layout="@layout/fragment_my_order" />
+
 </navigation>

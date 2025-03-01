@@ -1,27 +1,24 @@
-package com.example.fruit_store.ui.Home;
+package com.example.fruit_store.ui.Warehouse;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fruit_store.R;
-import com.example.fruit_store.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+public class WarehouseFragment extends Fragment {
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_home, container ,false);
+        View root = inflater.inflate(R.layout.fragment_warehouse, container , false);
         return root;
     }
+
 
 }

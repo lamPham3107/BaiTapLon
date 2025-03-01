@@ -1,0 +1,96 @@
+package com.example.fruit_store.activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.fruit_store.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class LoginActivity extends AppCompatActivity {
+    private Button bt_sign_in;
+    private EditText txt_email_login;
+    private  EditText txt_password_login;
+    private TextView txt_sign_up;
+
+    private ProgressBar progressBar;
+    private FirebaseAuth auth;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_login);
+
+        auth = FirebaseAuth.getInstance();
+        progressBar = (ProgressBar) findViewById(R.id.processbar);
+        progressBar.setVisibility(View.GONE);
+
+        bt_sign_in = (Button) findViewById(R.id.bt_sign_in);
+        txt_email_login = (EditText)  findViewById(R.id.txt_email_login);
+        txt_password_login =(EditText) findViewById(R.id.txt_password_login);
+        txt_sign_up =(TextView) findViewById(R.id.txt_sign_up);
+
+        txt_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sign_up_intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                startActivity(sign_up_intent);
+            }
+        });
+
+        bt_sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                loginUser();
+            }
+        });
+    }
+
+    private void loginUser() {
+
+        String userEmail = txt_email_login.getText().toString();
+        String userPassword = txt_password_login.getText().toString();
+
+        if(TextUtils.isEmpty(userEmail)){
+            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(userPassword)){
+            Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(userPassword.length() < 6){
+            Toast.makeText(this, "Password must be greater than 6 letter", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        auth.signInWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+}
