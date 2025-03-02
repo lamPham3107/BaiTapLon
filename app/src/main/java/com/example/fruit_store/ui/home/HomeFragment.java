@@ -1,4 +1,4 @@
-package com.example.fruit_store.ui.Home;
+package com.example.fruit_store.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
