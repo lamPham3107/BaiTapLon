@@ -11,24 +11,24 @@ import com.example.fruit_store.MainActivity;
 import com.example.fruit_store.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_welcome);
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null){
-            startActivity(new Intent(HomeActivity.this, MainActivity.class));
+            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         }
     }
     public void login(View view) {
-        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
     }
 
     public void registration(View view) {
-        startActivity(new Intent(HomeActivity.this, RegistrationActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
 }
