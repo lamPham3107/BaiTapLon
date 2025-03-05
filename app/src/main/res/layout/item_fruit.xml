@@ -8,23 +8,26 @@
     android:layout_margin="8dp">
 
     <LinearLayout
+        android:id="@+id/fruit_linearlayout"
         android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+
         android:orientation="vertical"
         android:padding="12dp">
 
         <ImageView
             android:id="@+id/fruitImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
+
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/fruitName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
             android:paddingTop="8dp"
             android:text="Product Name"
             android:textStyle="bold" />
@@ -41,7 +44,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
-            android:layout_marginTop="20dp"
+
             android:src="@drawable/ic_baseline_shopping_cart_24" />
 
     </LinearLayout>

@@ -21,7 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null){
-            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+
         }
     }
     public void login(View view) {

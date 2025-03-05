@@ -1,37 +1,40 @@
 package com.example.fruit_store.models;
 
 public class Fruit {
-    String Fruit_Name;
-    String Fruit_Price;
-    int Image_Res;
+    String name;
+    String price;
+    String img_url;
 
-    public Fruit(String fruit_Name, String fruit_Price, int image_Res) {
-        Fruit_Name = fruit_Name;
-        Fruit_Price = fruit_Price;
-        Image_Res = image_Res;
+    public Fruit() {
     }
 
-    public int getImage_Res() {
-        return Image_Res;
+    public Fruit(String name, String price, String img_url) {
+        this.name = name;
+        this.price = price;
+        this.img_url = img_url;
     }
 
-    public void setImage_Res(int image_Res) {
-        Image_Res = image_Res;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public String getFruit_Name() {
-        return Fruit_Name;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
-    public void setFruit_Name(String fruit_Name) {
-        Fruit_Name = fruit_Name;
+    public String getName() {
+        return name;
     }
 
-    public String getFruit_Price() {
-        return Fruit_Price;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setFruit_Price(String fruit_Price) {
-        Fruit_Price = fruit_Price;
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation(libs.play.services.base)
     implementation(platform(libs.firebase.bom))
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -54,6 +55,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
     implementation(libs.picasso)
+    implementation(libs.glide)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
