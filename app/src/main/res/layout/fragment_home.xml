@@ -15,18 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/seach_box"
+        <SearchView
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/search_gb"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:drawablePadding="5dp"
-            android:elevation="3dp"
-            android:hint="Lets seach your Fruits"
-            android:padding="13dp"
-            tools:layout_editor_absoluteX="8dp" />
+            android:queryHint="Search your Fruits" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

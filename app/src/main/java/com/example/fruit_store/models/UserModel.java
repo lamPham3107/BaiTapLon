@@ -7,15 +7,17 @@ public class UserModel {
     private String phoneNumber;
     private String address;
     private  String profileImg;
+    private String role;
     public UserModel() {
     }
 
-    public UserModel(String name, String email, String password, String phoneNumber, String address) {
+    public UserModel(String name, String email, String password, String phoneNumber, String address, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -64,6 +66,14 @@ public class UserModel {
 
     public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
 

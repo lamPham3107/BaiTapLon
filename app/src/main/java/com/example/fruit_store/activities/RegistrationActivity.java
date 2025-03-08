@@ -38,6 +38,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String userPassword = txt_Password.getText().toString();
         String userPhoneNumber = txt_Phone_Number.getText().toString();
         String userAddress = txt_Address.getText().toString();
-
+        String userRole = "user";
         if(TextUtils.isEmpty(userName)){
             Toast.makeText(this, "Name is empty", Toast.LENGTH_SHORT).show();
             return;
@@ -121,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isComplete()){
 
-                    UserModel userModel = new UserModel(userName,userEmail,userPassword,userPhoneNumber,userAddress);
+                    UserModel userModel = new UserModel(userName,userEmail,userPassword,userPhoneNumber,userAddress,userRole);
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(userModel);
                     progressBar.setVisibility(View.GONE);

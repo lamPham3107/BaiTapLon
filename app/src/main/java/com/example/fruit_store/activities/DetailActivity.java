@@ -60,8 +60,11 @@ public class DetailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+
+        // bat nut back
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         txt_quantity = (TextView) findViewById(R.id.quantity);
 
