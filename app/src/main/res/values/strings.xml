@@ -16,4 +16,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="my_order">my_order</string>
     <string name="revenue">revenue</string>
+    <string name="my_cart">my_cart</string>
 </resources>

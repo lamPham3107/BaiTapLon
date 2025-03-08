@@ -1,11 +1,12 @@
 package com.example.fruit_store.models;
 
 public class UserModel {
-    String name;
-    String email;
-    String password;
-    String phoneNumber;
-    String address;
+    private String name;
+    private String email;
+    private String password;
+    private String phoneNumber;
+    private String address;
+    private  String profileImg;
     public UserModel() {
     }
 
@@ -55,6 +56,14 @@ public class UserModel {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 }
 

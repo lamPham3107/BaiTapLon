@@ -21,9 +21,9 @@
             android:icon="@drawable/money"
             android:title="Revenue" />
         <item
-            android:id="@+id/nav_my_order"
+            android:id="@+id/nav_my_cart"
             android:icon="@drawable/ic_baseline_shopping_cart_24"
-            android:title="My Order" />
+            android:title="My cart" />
 
     </group>
 </menu>

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.fruit_store.Adapters.FruitAdapters;
-import com.example.fruit_store.models.Fruit;
+import com.example.fruit_store.models.FruitModel;
 import com.example.fruit_store.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView_fruit;
     private FruitAdapters fruitAdapter;
-    private List<Fruit> fruitList;
+    private List<FruitModel> fruitModelList;
     private FirebaseFirestore db;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,8 +37,8 @@ public class HomeFragment extends Fragment {
 
         recyclerView_fruit = root.findViewById(R.id.fruit_recyclerView);
         recyclerView_fruit.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        fruitList = new ArrayList<>();
-        fruitAdapter = new FruitAdapters(getActivity(),fruitList);
+        fruitModelList = new ArrayList<>();
+        fruitAdapter = new FruitAdapters(getActivity(), fruitModelList);
         recyclerView_fruit.setAdapter(fruitAdapter);
         db.collection("Fruit")
                 .get()
@@ -47,8 +47,8 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()){
-                                Fruit fruit = document.toObject(Fruit.class);
-                                fruitList.add(fruit);
+                                FruitModel fruitModel = document.toObject(FruitModel.class);
+                                fruitModelList.add(fruitModel);
                                 fruitAdapter.notifyDataSetChanged();
                             }
                         }

@@ -3,7 +3,9 @@ package com.example.fruit_store.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -72,6 +74,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+        View rootView = findViewById(android.R.id.content);
+        rootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
+
     }
 
     private void creatUser() {
@@ -110,7 +121,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isComplete()){
 
-                    UserModel userModel = new UserModel(userName, userEmail,userPassword,userPhoneNumber,userAddress);
+                    UserModel userModel = new UserModel(userName,userEmail,userPassword,userPhoneNumber,userAddress);
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(userModel);
                     progressBar.setVisibility(View.GONE);
@@ -122,5 +133,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

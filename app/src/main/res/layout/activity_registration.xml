@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".activities.RegistrationActivity">
 
     <ImageView
@@ -95,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_phone_number"
-        android:drawableLeft="@drawable/menu_person"
+        android:drawableLeft="@drawable/ic_baseline_location_on_24"
         android:drawablePadding="10dp"
         />
     <Button
