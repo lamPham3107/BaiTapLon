@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.post(() -> {
+            navigationView.setCheckedItem(R.id.nav_home);
+        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_my_cart)
+                R.id.nav_home, R.id.nav_profile, R.id.nav_my_cart, R.id.nav_warehouse , R.id.nav_revenue)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
