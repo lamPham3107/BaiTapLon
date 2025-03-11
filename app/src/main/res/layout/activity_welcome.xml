@@ -14,25 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/aclonica"
-        android:text="Welcome To Fruit Store App"
+        android:text="FMart"
         android:textColor="@color/purple_700"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_explore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/aclonica"
-        android:text="Explore us"
-        android:textColor="@color/purple_700"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txt_welcome" />
+
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -40,7 +29,7 @@
         android:src="@mipmap/grocery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_explore"
+        app:layout_constraintTop_toBottomOf="@+id/txt_welcome"
         android:layout_marginTop="20dp"
         app:layout_constraintVertical_bias="0"
         />
@@ -66,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Đăng nhập"
                 android:textSize="22dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/alice"
@@ -79,6 +68,7 @@
             android:onClick="registration"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal" >
             <ImageView
                 android:layout_width="50dp"
@@ -88,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registration"
+                android:text="Đăng kí"
                 android:textSize="22dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/alice"
@@ -105,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/alice"
-        android:text="We Are Happy To Have You ! Get Ready To Buy Lots Of Delicious Fruit"
+        android:text="Cảm ơn bạn đã ghé thăm! Chúng tôi cung cấp các loại trái cây tươi mới theo mùa!"
         android:textAlignment="center"
         android:textColor="@color/purple_700"
 

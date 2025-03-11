@@ -8,19 +8,19 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menuhome"
             android:checked="true"
-            android:title="@string/menu_home" />
+            android:title="Chợ" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_baseline_person_24"
-            android:title="@string/profile" />
+            android:title="Thông tin tài khoản" />
         <item
             android:id="@+id/nav_my_cart"
             android:icon="@drawable/ic_baseline_shopping_cart_24"
-            android:title="My cart" />
+            android:title="Giỏ Hàng" />
         <item
             android:id="@+id/nav_warehouse"
             android:icon="@drawable/warehouse"
-            android:title="@string/warehouse"
+            android:title="Nhà Kho"
             android:visible="false"
             />
         <item
@@ -28,6 +28,6 @@
             android:icon="@drawable/money"
             android:visible="false"
             android:checked="false"
-            android:title="Revenue" />
+            android:title="Thống kê doanh thu" />
     </group>
 </menu>

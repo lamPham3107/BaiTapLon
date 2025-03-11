@@ -84,15 +84,15 @@ public class LoginActivity extends AppCompatActivity {
         String userPassword = txt_password_login.getText().toString();
 
         if(TextUtils.isEmpty(userEmail)){
-            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(userPassword)){
-            Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(userPassword.length() < 6){
-            Toast.makeText(this, "Password must be greater than 6 letter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password phải chứa nhiều hơn 5 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             progressBar.setVisibility(View.GONE);

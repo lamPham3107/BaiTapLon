@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
         String address = txt_address.getText().toString();
 
         if (name.isEmpty() || phone.isEmpty() || address.isEmpty()) {
-            Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Cần nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .child("address").setValue(address);
 
-        Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
 
     }
     private void hideKeyboard(View view) {

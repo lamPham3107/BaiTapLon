@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fruit Name"
+                android:text="Tên Trái Cây"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Price"
+                android:text="Giá"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Current Date"
+                android:text="Mua Ngày"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Current Time"
+                android:text="Mua Lúc"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total Quantity"
+                android:text="Số lượng"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView
@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total Price"
+                android:text="Tổng Tiền"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
             <TextView

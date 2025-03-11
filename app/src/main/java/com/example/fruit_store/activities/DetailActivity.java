@@ -75,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
         if(fruitModel != null){
            Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
            txt_description.setText(fruitModel.getDescription());
-           txt_price.setText("Price: $" + fruitModel.getPrice() + " /Kg");
+           txt_price.setText(fruitModel.getPrice() + " VNĐ/Kg");
 
         }
 
@@ -113,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
         Calendar calForDate = Calendar.getInstance();
 
         // dd la ngay trong thang , MM la thang , DD la ngay trong nam , mm la phut
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd MM , yyyy" , Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd , MM , yyyy" , Locale.getDefault());
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -132,7 +132,7 @@ public class DetailActivity extends AppCompatActivity {
                 .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(DetailActivity.this , "AddedToCart successful" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailActivity.this , "Thêm vào giỏ hàng thành công" , Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

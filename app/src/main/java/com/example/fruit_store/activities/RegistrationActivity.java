@@ -94,27 +94,27 @@ public class RegistrationActivity extends AppCompatActivity {
         String userAddress = txt_Address.getText().toString();
         String userRole = "user";
         if(TextUtils.isEmpty(userName)){
-            Toast.makeText(this, "Name is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Họ tên đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(userEmail)){
-            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(userPassword)){
-            Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(userPhoneNumber)){
-            Toast.makeText(this, "Phone number is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "SĐT đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(userAddress)){
-            Toast.makeText(this, "Address is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Địa chỉ đang rỗng", Toast.LENGTH_SHORT).show();
             return;
         }
         if(userPassword.length() < 6){
-            Toast.makeText(this, "Password must be greater than 6 letter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password phải nhiều hơn 5 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
         auth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -126,7 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(userModel);
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     progressBar.setVisibility(View.GONE);

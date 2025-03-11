@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Detail Fruits" />
+        app:title="Thông Tin Chi Tiết" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_img"
-        android:text="Price:"
+        android:text="Giá:"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         />
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detail_description"
-        android:text="Description"
+        android:text="Miêu tả"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_price"
@@ -119,7 +119,7 @@
         android:id="@+id/add_to_cart"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Add To Cart"
+        android:text="Thêm vào giỏ hàng"
         android:textColor="@color/white"
         android:background="@drawable/btn_bg_detailed"
         app:layout_constraintBottom_toBottomOf="parent"
