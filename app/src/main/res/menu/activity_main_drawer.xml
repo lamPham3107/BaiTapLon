@@ -24,10 +24,10 @@
             android:visible="false"
             />
         <item
-            android:id="@+id/nav_revenue"
+            android:id="@+id/nav_bill"
             android:icon="@drawable/money"
             android:visible="false"
             android:checked="false"
-            android:title="Thống kê doanh thu" />
+            android:title="Hóa Đơn" />
     </group>
 </menu>

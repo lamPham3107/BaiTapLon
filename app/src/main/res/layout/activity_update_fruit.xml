@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.Warehouse.updateFruit">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/add_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sửa sản phẩm" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="528dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgud"
+            android:layout_width="144dp"
+            android:layout_height="153dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/image" />
+
+        <EditText
+            android:id="@+id/editname"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Tên sản phẩm"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editprice"
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Giá"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editquantity"
+            android:layout_width="wrap_content"
+            android:layout_height="74dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Số lượng"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editreview"
+            android:layout_width="wrap_content"
+            android:layout_height="82dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Mô tả"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnud"
+        android:layout_width="154dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        android:gravity="center|center_vertical"
+        android:text="Cập nhật" />
+
+</LinearLayout>

@@ -44,7 +44,8 @@ public class HomeFragment extends Fragment {
         fruitAdapter = new FruitAdapters(getActivity(), filteredList);
         recyclerView_fruit.setAdapter(fruitAdapter);
 
-        db.collection("Fruit")
+        // lay du lieu tu firebase truyen vao fruitModelList , filterList de loc tim kiem
+        db.collection("Fruits")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_my_cart, R.id.nav_warehouse , R.id.nav_revenue)
+                R.id.nav_home, R.id.nav_profile, R.id.nav_my_cart, R.id.nav_warehouse , R.id.nav_bill)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -110,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
 
                         Menu menu = navigationView.getMenu();
                         MenuItem warehouseItem = menu.findItem(R.id.nav_warehouse);
-                        MenuItem revenueItem = menu.findItem(R.id.nav_revenue);
+                        MenuItem billItem = menu.findItem(R.id.nav_bill);
 
                         if ("admin".equals(role)) {
                             warehouseItem.setVisible(true);
-                            revenueItem.setVisible(true);
+                            billItem.setVisible(true);
                         } else {
                             warehouseItem.setVisible(false);
-                            revenueItem.setVisible(false);
+                            billItem.setVisible(false);
                         }
                     } else {
                         Log.d("FIREBASE_ROLE", "User data not found in database");

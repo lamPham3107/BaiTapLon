@@ -68,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
 
         txt_quantity = (TextView) findViewById(R.id.quantity);
 
+        // lay du lieu tu intent = key detail
         final Object object = getIntent().getSerializableExtra("detail");
         if(object instanceof FruitModel){
             fruitModel = (FruitModel) object;
@@ -119,6 +120,7 @@ public class DetailActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
+        // bang bam chua du lieu cac thuoc tinh cua fruitModel
         final HashMap<String , Object> cartMap = new HashMap<>();
 
         cartMap.put("fruitName", fruitModel.getName());
@@ -128,6 +130,7 @@ public class DetailActivity extends AppCompatActivity {
         cartMap.put("totalQuantity", txt_quantity.getText().toString());
         cartMap.put("totalPrice", total_price);
 
+        // day du lieu cua bang bam len firebase firestore
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

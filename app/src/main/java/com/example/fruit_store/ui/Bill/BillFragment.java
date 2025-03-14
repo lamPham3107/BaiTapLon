@@ -1,4 +1,4 @@
-package com.example.fruit_store.ui.Revenue;
+package com.example.fruit_store.ui.Bill;
 
 import android.os.Bundle;
 
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.example.fruit_store.R;
 
 
-public class RevenueFragment extends Fragment {
+public class BillFragment extends Fragment {
 
 
-    public RevenueFragment() {
+    public BillFragment() {
         // Required empty public constructor
     }
 
@@ -23,6 +23,6 @@ public class RevenueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_revenue, container, false);
+        return inflater.inflate(R.layout.fragment_bill, container, false);
     }
 }

@@ -2,10 +2,56 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/warehouse"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ui.Warehouse.WarehouseFragment">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/search_gb"
+                android:drawableLeft="@drawable/ic_baseline_search_24"
+                android:drawablePadding="5dp"
+                android:elevation="3dp"
+                android:ems="10"
+                android:hint="Tìm kiếm"
+                android:inputType="text"
+                android:padding="13dp" />
+
+            <Button
+                android:id="@+id/btnadd"
+                android:layout_width="37dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:background="#00FFFFFF"
+                android:foreground="@drawable/add_product__1_" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ware_recylerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
