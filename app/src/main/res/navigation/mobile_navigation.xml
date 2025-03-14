@@ -8,29 +8,29 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.fruit_store.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/chợ"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.fruit_store.ui.Profile.ProfileFragment"
-        android:label="@string/profile"
+        android:label="@string/thông_tin_cá_nhân"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_warehouse"
         android:name="com.example.fruit_store.ui.Warehouse.WarehouseFragment"
-        android:label="@string/warehouse"
+        android:label="@string/kho"
         tools:layout="@layout/fragment_warehouse" />
     <fragment
         android:id="@+id/nav_revenue"
         android:name="com.example.fruit_store.ui.Bill.BillFragment"
-        android:label="@string/bill"
+        android:label="@string/hóa_đơn"
         tools:layout="@layout/fragment_bill" />
     <fragment
         android:id="@+id/nav_my_cart"
         android:name="com.example.fruit_store.ui.MyCart.MyCartFragment"
-        android:label="@string/my_cart"
+        android:label="@string/giỏ_hàng"
         tools:layout="@layout/fragment_my_cart" />
 
 </navigation>

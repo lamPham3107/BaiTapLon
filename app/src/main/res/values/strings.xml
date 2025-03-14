@@ -18,4 +18,9 @@
     <string name="revenue">revenue</string>
     <string name="my_cart">my_cart</string>
     <string name="bill">Bill</string>
+    <string name="chợ">Chợ</string>
+    <string name="thông_tin_cá_nhân">Thông Tin Cá Nhân</string>
+    <string name="kho">Kho</string>
+    <string name="hóa_đơn">Hóa Đơn</string>
+    <string name="giỏ_hàng">Giỏ Hàng</string>
 </resources>
