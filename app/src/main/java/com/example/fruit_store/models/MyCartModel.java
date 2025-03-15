@@ -1,12 +1,15 @@
 package com.example.fruit_store.models;
 
-public class MyCartModel {
+import java.io.Serializable;
+
+public class MyCartModel implements Serializable {
     private String fruitName;
     private String fruitPrice;
     private String currentDate;
     private String currentTime;
     private String totalQuantity;
     private Double totalPrice;
+    private String doucumentId;
 
     public MyCartModel() {
     }
@@ -66,5 +69,13 @@ public class MyCartModel {
 
     public void setTotalQuantity(String totalQuantity) {
         this.totalQuantity = totalQuantity;
+    }
+
+    public String getDoucumentId() {
+        return doucumentId;
+    }
+
+    public void setDoucumentId(String doucumentId) {
+        this.doucumentId = doucumentId;
     }
 }

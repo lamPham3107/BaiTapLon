@@ -70,7 +70,7 @@ public class updateFruit extends AppCompatActivity {
         }
 
         db = FirebaseFirestore.getInstance();
-        storageRef = FirebaseStorage.getInstance().getReference("Add_Product").child(productName + ".jpg");
+        storageRef = FirebaseStorage.getInstance().getReference("Fruits_img").child(productName + ".jpg");
 
         imgUpdate = findViewById(R.id.imgud);
         edtName = findViewById(R.id.editname);
@@ -121,12 +121,12 @@ public class updateFruit extends AppCompatActivity {
         updates.put("quantity", quantity);
         updates.put("description", description);
 
-        db.collection("Add_Product").whereEqualTo("name", productName)
+        db.collection("Fruits").whereEqualTo("name", productName)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
-                        db.collection("Add_Product").document(documentId)
+                        db.collection("Fruits").document(documentId)
                                 .update(updates)
                                 .addOnSuccessListener(aVoid -> {
                                     if (imageUri == null) {
@@ -159,7 +159,7 @@ public class updateFruit extends AppCompatActivity {
     private void uploadImage(String documentId) {
         storageRef.putFile(imageUri).addOnSuccessListener(taskSnapshot ->
                 storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    db.collection("Add_Product").document(documentId)
+                    db.collection("Fruits_img").document(documentId)
                             .update("img_url", uri.toString())
                             .addOnSuccessListener(aVoid -> {
                                 progressDialog.dismiss();

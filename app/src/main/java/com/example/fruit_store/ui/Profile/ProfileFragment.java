@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -47,16 +48,23 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseDatabase database;
     private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container ,false);
 
         img_profile = (CircleImageView) root.findViewById(R.id.profile_img);
+        img_profile.setVisibility(View.GONE);
         txt_name = (EditText) root.findViewById(R.id.profile_name);
+        txt_name.setVisibility(View.GONE);
         txt_phone = (EditText) root.findViewById(R.id.profile_phone);
+        txt_phone.setVisibility(View.GONE);
         txt_address = (EditText) root.findViewById(R.id.profile_address);
+        txt_address.setVisibility(View.GONE);
         bt_update = (Button) root.findViewById(R.id.bt_update );
+        progressBar = (ProgressBar) root.findViewById(R.id.prf_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -118,6 +126,11 @@ public class ProfileFragment extends Fragment {
                         txt_name.setText(userModel.getName());
                         txt_phone.setText(userModel.getPhoneNumber());
                         txt_address.setText(userModel.getAddress());
+                        progressBar.setVisibility(View.GONE);
+                        img_profile.setVisibility(View.VISIBLE);
+                        txt_name.setVisibility(View.VISIBLE);
+                        txt_phone.setVisibility(View.VISIBLE);
+                        txt_address.setVisibility(View.VISIBLE);
                     }
 
                     @Override

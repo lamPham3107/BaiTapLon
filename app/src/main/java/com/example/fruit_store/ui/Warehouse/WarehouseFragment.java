@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -40,15 +41,20 @@ public class WarehouseFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private Button btnAdd;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_warehouse, container, false);
 
+        progressBar = (ProgressBar) root.findViewById(R.id.warehouse_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         // Khởi tạo RecyclerView
         recyclerView_Warehouse = root.findViewById(R.id.ware_recylerview);
         recyclerView_Warehouse.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView_Warehouse.setVisibility(View.GONE);
 
         // Khởi tạo danh sách & adapter
         listWare = new ArrayList<>();
@@ -84,6 +90,8 @@ public class WarehouseFragment extends Fragment {
                             listWare.add(warelist);
                         }
                         warehouseAdapter.notifyDataSetChanged(); // Chỉ cập nhật sau khi load xong
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView_Warehouse.setVisibility(View.VISIBLE);
                     } else {
                         Log.e("WarehouseFetch", "Lỗi truy cập dữ liệu ", task.getException());
                         Toast.makeText(getActivity(), "Lỗi: " + task.getException(), Toast.LENGTH_SHORT).show();

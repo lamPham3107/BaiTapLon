@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     private List<FruitModel> fruitModelList , filteredList;
     private FirebaseFirestore db;
     private SearchView searchBox;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,8 +39,14 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         db = FirebaseFirestore.getInstance();
         searchBox = root.findViewById(R.id.search_box);
+
+        progressBar = root.findViewById(R.id.home_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         filteredList = new ArrayList<>();
+
         recyclerView_fruit = root.findViewById(R.id.fruit_recyclerView);
+        recyclerView_fruit.setVisibility(View.GONE);
         recyclerView_fruit.setLayoutManager(new GridLayoutManager(getContext(), 2));
         fruitModelList = new ArrayList<>();
         fruitAdapter = new FruitAdapters(getActivity(), filteredList);
@@ -60,6 +68,8 @@ public class HomeFragment extends Fragment {
                             }
                             filteredList.addAll(fruitModelList);
                             fruitAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            recyclerView_fruit.setVisibility(View.VISIBLE);
                         }
                         else {
                             Toast.makeText(getActivity() , "Error" + task.getException(),Toast.LENGTH_SHORT);

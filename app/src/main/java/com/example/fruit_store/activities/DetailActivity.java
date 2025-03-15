@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.fruit_store.R;
 import com.example.fruit_store.models.FruitModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -41,6 +43,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView txt_quantity;
     private int total_quantity = 1;
     private double total_price = 0;
+    private double Max_quantity;
 
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
@@ -77,17 +80,14 @@ public class DetailActivity extends AppCompatActivity {
            Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
            txt_description.setText(fruitModel.getDescription());
            txt_price.setText(fruitModel.getPrice() + " VNĐ/Kg");
-
+            Max_quantity = Double.parseDouble(fruitModel.getQuantity());
         }
 
         img_addFruit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(total_quantity < 20){
                     total_quantity++;
                     txt_quantity.setText(String.valueOf(total_quantity));
-
-                }
             }
         });
         img_removeFruit.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +102,14 @@ public class DetailActivity extends AppCompatActivity {
         bt_addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total_price = Double.parseDouble(fruitModel.getPrice()) * total_quantity;
-                added_to_cart();
+                if(total_quantity < Max_quantity){
+                    total_price = Double.parseDouble(fruitModel.getPrice()) * total_quantity;
+                    added_to_cart();
+                }
+                else{
+                    Toast.makeText(DetailActivity.this , "trong kho khong du " , Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -114,7 +120,7 @@ public class DetailActivity extends AppCompatActivity {
         Calendar calForDate = Calendar.getInstance();
 
         // dd la ngay trong thang , MM la thang , DD la ngay trong nam , mm la phut
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd , MM , yyyy" , Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy" , Locale.getDefault());
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -131,11 +137,29 @@ public class DetailActivity extends AppCompatActivity {
         cartMap.put("totalPrice", total_price);
 
         // day du lieu cua bang bam len firebase firestore
-        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                .collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(DetailActivity.this , "Thêm vào giỏ hàng thành công" , Toast.LENGTH_SHORT).show();
+                        // cap nhat trang thai kho khi bam thanh toan
+//                        Map<String, Object> update_quantity = new HashMap<>();
+//                        update_quantity.put("quantity" , String.valueOf(Max_quantity - total_quantity));
+//                        firestore.collection("Fruits").whereEqualTo("name" , fruitModel.getName())
+//                                    .get()
+//                                        .addOnSuccessListener(queryDocumentSnapshots -> {
+//                                            if(!queryDocumentSnapshots.isEmpty()){
+//                                                String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
+//                                                firestore.collection("Fruits").document(documentId)
+//                                                        .update(update_quantity)
+//                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                            @Override
+//                                                            public void onSuccess(Void unused) {
+//                                                                Toast.makeText(DetailActivity.this , "da tru trong kho " , Toast.LENGTH_SHORT  ).show();
+//                                                            }
+//                                                        });
+//                                            }
+//                                        });
+
                         finish();
                     }
                 });

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Fruit_Store"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ThanksActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Warehouse.updateFruit"
             android:exported="false" />
         <activity
@@ -23,9 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.WelcomeActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="true" />

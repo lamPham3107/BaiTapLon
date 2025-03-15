@@ -62,7 +62,7 @@ public class FruitAdapters extends RecyclerView.Adapter<FruitAdapters.FruitViewH
     public void onBindViewHolder(@NonNull FruitViewHolder holder, int position) {
         Glide.with(context).load(fruitsList.get(position).getImg_url()).into(holder.fruitImage);
         holder.fruitName.setText(fruitsList.get(position).getName());
-        holder.fruitPrice.setText( fruitsList.get(position).getPrice() + "VND");
+        holder.fruitPrice.setText( fruitsList.get(position).getPrice() + " VND");
         int colorIndex = position % colors.length;
         holder.fruit_item_background.setBackgroundColor(colors[colorIndex]);
 
