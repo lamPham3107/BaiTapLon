@@ -23,7 +23,7 @@
         android:label="@string/kho"
         tools:layout="@layout/fragment_warehouse" />
     <fragment
-        android:id="@+id/nav_revenue"
+        android:id="@+id/nav_bill"
         android:name="com.example.fruit_store.ui.Bill.BillFragment"
         android:label="@string/hóa_đơn"
         tools:layout="@layout/fragment_bill" />

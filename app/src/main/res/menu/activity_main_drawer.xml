@@ -27,7 +27,6 @@
             android:id="@+id/nav_bill"
             android:icon="@drawable/money"
             android:visible="false"
-            android:checked="false"
             android:title="Hóa Đơn" />
     </group>
 </menu>

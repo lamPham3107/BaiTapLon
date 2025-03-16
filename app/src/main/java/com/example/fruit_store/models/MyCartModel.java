@@ -14,6 +14,7 @@ public class MyCartModel implements Serializable {
     public MyCartModel() {
     }
 
+
     public MyCartModel(String fruitName, String fruitPrice, String currentDate, String currentTime, String totalQuantity, Double totalPrice) {
         this.fruitName = fruitName;
         this.fruitPrice = fruitPrice;

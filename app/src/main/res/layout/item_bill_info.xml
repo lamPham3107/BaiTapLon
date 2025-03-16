@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/txt_name_info"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:text="Tên trái cây"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/txt_quantity_info"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="SL"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/txt_price_info"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="ĐG"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/txt_total_info"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="T.Tiền"
+        android:textSize="14sp"/>
+</LinearLayout>
