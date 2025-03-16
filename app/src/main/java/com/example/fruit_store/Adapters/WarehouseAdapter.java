@@ -103,7 +103,7 @@ public class WarehouseAdapter extends RecyclerView.Adapter<WarehouseAdapter.Ware
             Intent intent = new Intent(context, updateFruit.class);
             intent.putExtra("name", fruit.getName());
             intent.putExtra("price", fruit.getPrice());
-            intent.putExtra("quantity", fruit.getQuantity());
+            intent.putExtra("quantity", String.valueOf(fruit.getQuantity()));
             intent.putExtra("description", fruit.getDescription());
             intent.putExtra("img_url", fruit.getImg_url());
 

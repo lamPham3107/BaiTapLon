@@ -18,31 +18,26 @@
         tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="388dp"
             android:layout_height="78dp"
             android:orientation="horizontal">
 
-            <EditText
+            <SearchView
                 android:id="@+id/search"
-                android:layout_width="326dp"
+                android:layout_width="313dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/search_gb"
-                android:drawableLeft="@drawable/ic_baseline_search_24"
-                android:drawablePadding="5dp"
-                android:elevation="3dp"
-                android:ems="10"
-                android:hint="Tìm kiếm"
-                android:inputType="text"
-                android:padding="13dp" />
+                android:layout_gravity="center">
+
+            </SearchView>
 
             <Button
                 android:id="@+id/btnadd"
-                android:layout_width="37dp"
-                android:layout_height="38dp"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#00FFFFFF"
                 android:foreground="@drawable/add_product__1_" />
+
 
         </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fruit_store.Adapters.FruitAdapters;
 import com.example.fruit_store.Adapters.WarehouseAdapter;
 import com.example.fruit_store.R;
 import com.example.fruit_store.models.FruitModel;
@@ -37,11 +39,13 @@ public class WarehouseFragment extends Fragment {
 
     private RecyclerView recyclerView_Warehouse;
     private WarehouseAdapter warehouseAdapter;
-    private List<FruitModel> listWare;
+    private List<FruitModel> listWare,filteredList;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private Button btnAdd;
     private ProgressBar progressBar;
+    private SearchView searchBox;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,9 +62,13 @@ public class WarehouseFragment extends Fragment {
 
         // Khởi tạo danh sách & adapter
         listWare = new ArrayList<>();
-        warehouseAdapter = new WarehouseAdapter(getActivity(), listWare,updateLauncher);
+        filteredList = new ArrayList<>();
+
+        warehouseAdapter = new WarehouseAdapter(getActivity(), filteredList, updateLauncher);
         recyclerView_Warehouse.setAdapter(warehouseAdapter);
 
+
+        searchBox = root.findViewById(R.id.search);
         // Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -75,7 +83,61 @@ public class WarehouseFragment extends Fragment {
             startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
         });
 
+
+        // lay du lieu tu firebase truyen vao listware , filterList de loc tim kiem
+        db.collection("Fruits")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            listWare.clear();
+                            filteredList.clear();
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                FruitModel fruitModel = document.toObject(FruitModel.class);
+                                listWare.add(fruitModel);
+
+                            }
+                            filteredList.addAll(listWare);
+                            warehouseAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            recyclerView_Warehouse.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            Toast.makeText(getActivity() , "Error" + task.getException(),Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
+
+        //bat su kien tim kiem
+        searchBox.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filter(query);
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
+            }
+        });
         return root;
+    }
+
+    // Bắt sự kiện nhập vào SearchView
+    private void filter(String text) {
+        filteredList.clear();
+        if (text.isEmpty()) {
+            filteredList.addAll(listWare);
+        } else {
+            for (FruitModel fruit : listWare) {
+                if (fruit.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(fruit);
+                }
+            }
+        }
+        warehouseAdapter.notifyDataSetChanged();
     }
 
     // Phương thức tải danh sách sản phẩm từ Firestore

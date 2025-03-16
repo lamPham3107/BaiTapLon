@@ -103,10 +103,10 @@ public class updateFruit extends AppCompatActivity {
     private void updateProduct() {
         String name = edtName.getText().toString().trim();
         String price = edtPrice.getText().toString().trim();
-        String quantity = edtQuantity.getText().toString().trim();
+        int quantity = Integer.parseInt(edtQuantity.getText().toString().trim());
         String description = edtDescription.getText().toString().trim();
 
-        if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || description.isEmpty()) {
+        if (name.isEmpty() || price.isEmpty() || edtQuantity.getText().toString().trim().isEmpty() || description.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }

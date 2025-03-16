@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -34,7 +35,7 @@ public class addFruit extends AppCompatActivity {
     private EditText edtName, edtPrice, edtQuantity, edtDescription;
     private Button btnAddProduct;
     private Uri imageUri;
-
+    private Toolbar toolbar;
     private FirebaseFirestore firestore;
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
@@ -58,7 +59,11 @@ public class addFruit extends AppCompatActivity {
         edtQuantity = findViewById(R.id.editquantity);
         edtDescription = findViewById(R.id.editreview);
         btnAddProduct = findViewById(R.id.btnupdate);
-
+        toolbar = findViewById(R.id.add_toolbar);
+        // bat nut back
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Fruits_img");
         progressDialog = new ProgressDialog(this);
