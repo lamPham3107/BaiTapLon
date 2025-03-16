@@ -7,11 +7,11 @@ public class FruitModel implements Serializable {
     private String price;
     private String img_url;
     private String description;
-    private String quantity;
+    private int quantity;
     public FruitModel() {
     }
 
-    public FruitModel(String name, String price, String img_url, String description, String quantity) {
+    public FruitModel(String name, String price, String img_url, String description, int quantity) {
         this.name = name;
         this.price = price;
         this.img_url = img_url;
@@ -58,11 +58,11 @@ public class FruitModel implements Serializable {
         this.price = price;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

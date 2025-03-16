@@ -116,7 +116,7 @@ public class MyCartFragment extends Fragment {
                 Intent intent = new Intent( getContext(), ThanksActivity.class);
                 updateToBills();
                 intent.putExtra("fruitList" ,(Serializable) myCartModelList);
-                deleteAllCart();
+
                 startActivity(intent);
             }
         });
@@ -174,6 +174,7 @@ public class MyCartFragment extends Fragment {
     }
     private void createBill(String name, String phone, String address) {
         List<Map<String, Object>> items = new ArrayList<>();
+        Log.d("createBill", "Số lượng sản phẩm trong giỏ hàng: " + myCartModelList.size());
         for (MyCartModel cartItem : myCartModelList) {
             Map<String, Object> item = new HashMap<>();
             item.put("fruitName", cartItem.getFruitName());
@@ -185,8 +186,11 @@ public class MyCartFragment extends Fragment {
             items.add(item);
 
             totalPrice += cartItem.getTotalPrice();
+
         }
 
+        Log.d("createBill", "Tổng giá trị đơn hàng: " + totalPrice);
+        Log.d("createBill", "Số lượng items trong danh sách: " + items.size());
         // Lấy bill ID cuối cùng từ Firestore
         firestore.collection("Bills")
                 .orderBy("id", com.google.firebase.firestore.Query.Direction.DESCENDING)
@@ -209,6 +213,7 @@ public class MyCartFragment extends Fragment {
                             .set(bill)
                             .addOnSuccessListener(unused ->{
                                 Log.d("Firestore", "Bill added successfully");
+                                deleteAllCart();
                                 }
                             )
                             .addOnFailureListener(e -> Log.e("Firestore", "Lỗi khi thêm bill: " + e.getMessage()));

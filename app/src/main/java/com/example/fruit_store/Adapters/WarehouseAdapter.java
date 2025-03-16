@@ -115,7 +115,6 @@ public class WarehouseAdapter extends RecyclerView.Adapter<WarehouseAdapter.Ware
     }
 
 
-
     private void deleteProduct(String productName) {
         new AlertDialog.Builder(context)
                 .setTitle("Xóa Sản Phẩm")

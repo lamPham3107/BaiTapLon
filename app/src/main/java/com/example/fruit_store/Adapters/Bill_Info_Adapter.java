@@ -34,14 +34,16 @@ public class Bill_Info_Adapter extends RecyclerView.Adapter<Bill_Info_Adapter.Bi
         Map<String, Object> item = billItems.get(position);
 
         String name = (String) item.get("fruitName");
-        String quantity = (String) item.get("totalQuantity");
+        Number totalQuantityObj = (Number) item.get("totalQuantity");
+        int totalQuantity = totalQuantityObj != null ? totalQuantityObj.intValue() : 0;
         String price = (String) item.get("fruitPrice");
-        Double total = (Double) item.get("totalPrice");
+        Number totalPriceObj = (Number) item.get("totalPrice");
+        int totalPrice = totalPriceObj != null ? totalPriceObj.intValue() : 0;
 
         holder.txtName.setText(name);
-        holder.txtQuantity.setText(quantity);
+        holder.txtQuantity.setText(String.valueOf(totalQuantity));
         holder.txtPrice.setText( price);
-        holder.txtTotal.setText(String.format("%.0f VNĐ", total));
+        holder.txtTotal.setText(String.format("%d VNĐ", totalPrice));
     }
 
     @Override

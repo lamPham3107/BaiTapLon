@@ -42,8 +42,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView txt_quantity;
     private int total_quantity = 1;
-    private double total_price = 0;
-    private double Max_quantity;
+    private int total_price = 0;
+    private int Max_quantity;
 
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
            Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
            txt_description.setText(fruitModel.getDescription());
            txt_price.setText(fruitModel.getPrice() + " VNĐ/Kg");
-            Max_quantity = Double.parseDouble(fruitModel.getQuantity());
+           Max_quantity =fruitModel.getQuantity();
         }
 
         img_addFruit.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(total_quantity < Max_quantity){
-                    total_price = Double.parseDouble(fruitModel.getPrice()) * total_quantity;
+                    total_price = Integer.parseInt(fruitModel.getPrice()) * total_quantity;
                     added_to_cart();
                 }
                 else{
@@ -133,7 +133,7 @@ public class DetailActivity extends AppCompatActivity {
         cartMap.put("fruitPrice", txt_price.getText().toString());
         cartMap.put("currentDate", saveCurrentDate);
         cartMap.put("currentTime", saveCurrentTime);
-        cartMap.put("totalQuantity", txt_quantity.getText().toString());
+        cartMap.put("totalQuantity", total_quantity);
         cartMap.put("totalPrice", total_price);
 
         // day du lieu cua bang bam len firebase firestore
@@ -141,25 +141,6 @@ public class DetailActivity extends AppCompatActivity {
                 .collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        // cap nhat trang thai kho khi bam thanh toan
-//                        Map<String, Object> update_quantity = new HashMap<>();
-//                        update_quantity.put("quantity" , String.valueOf(Max_quantity - total_quantity));
-//                        firestore.collection("Fruits").whereEqualTo("name" , fruitModel.getName())
-//                                    .get()
-//                                        .addOnSuccessListener(queryDocumentSnapshots -> {
-//                                            if(!queryDocumentSnapshots.isEmpty()){
-//                                                String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
-//                                                firestore.collection("Fruits").document(documentId)
-//                                                        .update(update_quantity)
-//                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                            @Override
-//                                                            public void onSuccess(Void unused) {
-//                                                                Toast.makeText(DetailActivity.this , "da tru trong kho " , Toast.LENGTH_SHORT  ).show();
-//                                                            }
-//                                                        });
-//                                            }
-//                                        });
-
                         finish();
                     }
                 });

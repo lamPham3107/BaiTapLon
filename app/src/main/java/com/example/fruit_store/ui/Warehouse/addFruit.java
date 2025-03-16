@@ -142,7 +142,7 @@ public class addFruit extends AppCompatActivity {
         productMap.put("img_url", imageUrl);
         productMap.put("name", edtName.getText().toString().trim());
         productMap.put("price", edtPrice.getText().toString().trim());
-        productMap.put("quantity", edtQuantity.getText().toString().trim());
+        productMap.put("quantity", Integer.parseInt(edtQuantity.getText().toString().trim()));
         productMap.put("description", edtDescription.getText().toString().trim());
 
         firestore.collection("Fruits").document().set(productMap)

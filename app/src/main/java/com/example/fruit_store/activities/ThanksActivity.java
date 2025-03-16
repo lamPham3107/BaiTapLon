@@ -1,6 +1,7 @@
 package com.example.fruit_store.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -57,30 +58,12 @@ public class ThanksActivity extends AppCompatActivity {
                 cartMap.put("currentTime", model.getCurrentTime());
                 cartMap.put("totalQuantity", model.getTotalQuantity());
                 cartMap.put("totalPrice", model.getTotalPrice());
-
                 // day du lieu cua bang bam len firebase firestore
                 firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
                         .collection("MyOrder").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentReference> task) {
-                                // cap nhat trang thai kho khi bam thanh toan
-//                        Map<String, Object> update_quantity = new HashMap<>();
-//                        update_quantity.put("quantity" , String.valueOf(Max_quantity - total_quantity));
-//                        firestore.collection("Fruits").whereEqualTo("name" , fruitModel.getName())
-//                                    .get()
-//                                        .addOnSuccessListener(queryDocumentSnapshots -> {
-//                                            if(!queryDocumentSnapshots.isEmpty()){
-//                                                String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
-//                                                firestore.collection("Fruits").document(documentId)
-//                                                        .update(update_quantity)
-//                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                            @Override
-//                                                            public void onSuccess(Void unused) {
-//                                                                Toast.makeText(DetailActivity.this , "da tru trong kho " , Toast.LENGTH_SHORT  ).show();
-//                                                            }
-//                                                        });
-//                                            }
-//                                        });
+
                                 Toast.makeText(ThanksActivity.this , "My order added" , Toast.LENGTH_SHORT).show();
                             }
                         });
