@@ -73,8 +73,7 @@ public class WarehouseFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // Load danh sách sản phẩm từ Firestore
-        loadProductList();
+
 
         // Button thêm sản phẩm
         btnAdd = root.findViewById(R.id.btnadd);
@@ -122,6 +121,9 @@ public class WarehouseFragment extends Fragment {
                 return true;
             }
         });
+
+        // Load danh sách sản phẩm từ Firestore
+        loadProductList();
         return root;
     }
 
@@ -146,11 +148,14 @@ public class WarehouseFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        listWare.clear(); // Xóa dữ liệu cũ
+                        filteredList.clear();// Xóa dữ liệu cũ
+                        listWare.clear();
+
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             FruitModel warelist = document.toObject(FruitModel.class);
                             listWare.add(warelist);
                         }
+                        filteredList.addAll(listWare);
                         warehouseAdapter.notifyDataSetChanged(); // Chỉ cập nhật sau khi load xong
                         progressBar.setVisibility(View.GONE);
                         recyclerView_Warehouse.setVisibility(View.VISIBLE);
