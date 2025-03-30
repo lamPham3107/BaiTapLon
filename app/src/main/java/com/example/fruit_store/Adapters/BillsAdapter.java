@@ -1,5 +1,7 @@
 package com.example.fruit_store.Adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fruit_store.R;
 import com.example.fruit_store.activities.BillInfoActivity;
 import com.example.fruit_store.models.BillModel;
+import com.example.fruit_store.ui.Bill.BillFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
@@ -27,6 +30,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
     private List<BillModel> list_bill;
     private Context context;
     private FirebaseFirestore firestore;
+    private BillFragment billFragment;
     public BillsAdapter(Context context, List<BillModel> list_bill) {
         this.context = context;
         this.list_bill = list_bill;
@@ -56,6 +60,8 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
             intent.putExtra("total_price", bill.getTotalPrice());
             context.startActivity(intent);
         });
+        holder.checkBoxPayment.setOnCheckedChangeListener(null);
+        holder.checkBoxPayment.setChecked(false);
         holder.checkBoxPayment.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 String billId = bill.getId();
@@ -63,13 +69,15 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                     firestore.collection("Bills").document(billId)
                             .delete()
                             .addOnSuccessListener(aVoid -> {
+                                Log.d("DeleteBill" , "delete: " + billId);
                                 int removedPosition = holder.getAdapterPosition();
-                                if (removedPosition != RecyclerView.NO_POSITION) {
+                                if (removedPosition != RecyclerView.NO_POSITION && removedPosition < list_bill.size()) {
                                     list_bill.remove(removedPosition);
                                     notifyItemRemoved(removedPosition);
-                                    notifyItemRangeChanged(removedPosition, list_bill.size());
                                     Toast.makeText(context, "Đã thanh toán và cập nhật kho!", Toast.LENGTH_SHORT).show();
                                 }
+                                // phai reload tai cu xoa het cac hóa đơn sau cua hoa don can xoa, nhưng trên firebase lại không xóa.
+                                reloadBillFragment();
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(context, "Lỗi khi xóa hóa đơn!", Toast.LENGTH_SHORT).show();
@@ -135,6 +143,15 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                         }
                     })
                     .addOnFailureListener(e -> Log.e("UpdateStock", "Lỗi truy vấn sản phẩm: " + e.getMessage()));
+        }
+    }
+    private void reloadBillFragment() {
+        if (context instanceof androidx.fragment.app.FragmentActivity) {
+            androidx.fragment.app.FragmentActivity activity = (androidx.fragment.app.FragmentActivity) context;
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_bill, new BillFragment()) // Thay thế fragment cũ
+                    .commit();
         }
     }
 

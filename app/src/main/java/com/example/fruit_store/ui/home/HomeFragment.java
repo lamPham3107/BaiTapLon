@@ -4,17 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.fruit_store.Adapters.FruitAdapters;
 import com.example.fruit_store.models.FruitModel;
 import com.example.fruit_store.R;
+import com.example.fruit_store.ui.Bill.BillFragment;
+import com.example.fruit_store.ui.MyCart.MyCartFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +38,7 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private SearchView searchBox;
     private ProgressBar progressBar;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +58,8 @@ public class HomeFragment extends Fragment {
         fruitModelList = new ArrayList<>();
         fruitAdapter = new FruitAdapters(getActivity(), filteredList);
         recyclerView_fruit.setAdapter(fruitAdapter);
+
+
 
         // lay du lieu tu firebase truyen vao fruitModelList , filterList de loc tim kiem
         db.collection("Fruits")
@@ -90,6 +99,7 @@ public class HomeFragment extends Fragment {
                 return true;
             }
         });
+
 
         return root;
     }

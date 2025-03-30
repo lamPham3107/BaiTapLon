@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class BillFragment extends Fragment {
     private BillsAdapter billsAdapter;
     private List<BillModel> list_bill;
 
-
+    private ProgressBar progressBar;
 
     public BillFragment() {
         // Required empty public constructor
@@ -51,8 +52,12 @@ public class BillFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_bill, container, false);
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+        progressBar = (ProgressBar) root.findViewById(R.id.bill_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         rcv_bill = (RecyclerView) root.findViewById(R.id.rcv_bill);
         rcv_bill.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rcv_bill.setVisibility(View.GONE);
         list_bill = new ArrayList<>();
         billsAdapter = new BillsAdapter(getActivity() , list_bill);
         rcv_bill.setAdapter(billsAdapter);
@@ -64,15 +69,11 @@ public class BillFragment extends Fragment {
         return root;
     }
 
-    private void loadBills() {
+    public void loadBills() {
         firestore.collection("Bills")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(error != null){
-                            Toast.makeText(getActivity(), "Lỗi tải hóa đơn", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
                         list_bill.clear();
                         if (value != null) {
                             for (QueryDocumentSnapshot doc : value) {
@@ -97,6 +98,8 @@ public class BillFragment extends Fragment {
                             }
                             billsAdapter.notifyDataSetChanged();
                         }
+                        progressBar.setVisibility(View.GONE);
+                        rcv_bill.setVisibility(View.VISIBLE);
                     }
                 });
     }

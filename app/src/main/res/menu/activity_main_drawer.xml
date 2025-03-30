@@ -8,7 +8,7 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menuhome"
             android:checked="true"
-            android:title="Chợ" />
+            android:title="Trang Chủ" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_baseline_person_24"

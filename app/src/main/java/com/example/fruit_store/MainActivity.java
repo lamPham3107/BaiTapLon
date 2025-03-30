@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import com.example.fruit_store.activities.WelcomeActivity;
+import com.example.fruit_store.ui.Bill.BillFragment;
+import com.example.fruit_store.ui.MyCart.MyCartFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
 
 
     @Override
@@ -79,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         checkUserRole(navigationView);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
