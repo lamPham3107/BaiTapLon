@@ -3,6 +3,7 @@ package com.example.fruit_store.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fruit_store.R;
 import com.example.fruit_store.models.MyCartModel;
+import com.example.fruit_store.ui.MyCart.MyCartFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +33,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     private List<MyCartModel> myCartModelList;
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
+    private MyCartFragment myCartFragment;
 
 
     public MyCartAdapter(Context context, List<MyCartModel> myCartModelList) {
@@ -69,6 +74,13 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
                                 if(task.isSuccessful()){
                                     myCartModelList.remove(myCartModelList.get(pos));
                                     notifyDataSetChanged();
+                                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                                    MyCartFragment myCartFragment = (MyCartFragment) fragmentManager.findFragmentByTag("MY_CART_FRAGMENT_TAG");
+                                    if (myCartFragment != null) {
+                                        myCartFragment.calculatorTotalAmount(myCartModelList);
+                                    } else {
+                                        Log.e("MyCartAdapter", "myCartFragment is null");
+                                    }
                                     Toast.makeText(context , "Đã xóa" , Toast.LENGTH_SHORT).show();
                                 }
                                 else {

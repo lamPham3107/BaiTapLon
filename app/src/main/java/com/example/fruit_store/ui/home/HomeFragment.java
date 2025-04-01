@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private SearchView searchBox;
     private ProgressBar progressBar;
+    private ImageButton bt_go_to_cart;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         db = FirebaseFirestore.getInstance();
         searchBox = root.findViewById(R.id.search_box);
+        bt_go_to_cart = root.findViewById(R.id.btn_go_to_cart);
 
         progressBar = root.findViewById(R.id.home_progressbar);
         progressBar.setVisibility(View.VISIBLE);
@@ -99,6 +101,8 @@ public class HomeFragment extends Fragment {
                 return true;
             }
         });
+        bt_go_to_cart.setOnClickListener(v -> reloadCartFragment());
+
 
 
         return root;
@@ -116,4 +120,18 @@ public class HomeFragment extends Fragment {
         }
         fruitAdapter.notifyDataSetChanged();
     }
+    private void reloadCartFragment() {
+        if (getActivity() instanceof androidx.fragment.app.FragmentActivity) {
+            androidx.fragment.app.FragmentActivity activity = (androidx.fragment.app.FragmentActivity) getActivity();
+            NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
+
+            // Xóa toàn bộ backstack trước khi điều hướng
+            navController.popBackStack(R.id.nav_home, true);
+
+            // Điều hướng đến giỏ hàng
+            navController.navigate(R.id.nav_my_cart);
+        }
+    }
+
+
 }

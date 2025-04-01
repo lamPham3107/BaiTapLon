@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fruit_store.R;
@@ -148,11 +150,10 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
     private void reloadBillFragment() {
         if (context instanceof androidx.fragment.app.FragmentActivity) {
             androidx.fragment.app.FragmentActivity activity = (androidx.fragment.app.FragmentActivity) context;
-            activity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_bill, new BillFragment()) // Thay thế fragment cũ
-                    .commit();
+            NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
+            navController.navigate(R.id.nav_bill); // Điều hướng lại về chính nó
         }
+
     }
 
 }

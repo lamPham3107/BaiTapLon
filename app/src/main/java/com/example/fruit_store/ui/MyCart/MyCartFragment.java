@@ -124,7 +124,7 @@ public class MyCartFragment extends Fragment {
         return root;
     }
 
-    private void calculatorTotalAmount(List<MyCartModel> myCartModelList) {
+    public void calculatorTotalAmount(List<MyCartModel> myCartModelList) {
 
         double totalAmount = 0.0;
         for (MyCartModel myCartModel: myCartModelList){
