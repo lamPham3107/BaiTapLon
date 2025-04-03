@@ -20,12 +20,12 @@
     <fragment
         android:id="@+id/nav_warehouse"
         android:name="com.example.fruit_store.ui.Warehouse.WarehouseFragment"
-        android:label="@string/kho"
+        android:label="Kho Hàng"
         tools:layout="@layout/fragment_warehouse" />
     <fragment
         android:id="@+id/nav_bill"
         android:name="com.example.fruit_store.ui.Bill.BillFragment"
-        android:label="@string/hóa_đơn"
+        android:label="Đơn Hàng"
         tools:layout="@layout/fragment_bill" />
     <fragment
         android:id="@+id/nav_my_cart"
