@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fruit_store.R;
 import com.example.fruit_store.models.FruitModel;
+
 import com.example.fruit_store.ui.Warehouse.updateFruit;
 import com.example.fruit_store.ui.Warehouse.WarehouseFragment;
 import com.example.fruit_store.ui.Warehouse.updateFruit;
@@ -84,7 +85,7 @@ public class WarehouseAdapter extends RecyclerView.Adapter<WarehouseAdapter.Ware
     public void onBindViewHolder(@NonNull WarehouseAdapter.WarehouseViewHolder holder, int position) {
         Glide.with(context).load(listWare.get(position).getImg_url()).into(holder.img);
         holder.txtname.setText("Tên : " +listWare.get(position).getName());
-        holder.txtprice.setText("Giá : " +listWare.get(position).getPrice()+ "VND");
+        holder.txtprice.setText("Giá : " +listWare.get(position).getPrice()+ "VND/" + listWare.get(position).getUnit());
         holder.txtquantity.setText("Số lượng : " + listWare.get(position).getQuantity());
 
 

@@ -24,4 +24,11 @@
     <string name="hóa_đơn">Hóa Đơn</string>
     <string name="giỏ_hàng">Giỏ Hàng</string>
     <string name="trang_chủ">Trang Chủ</string>
+
+    <string-array name="unit_array">
+        <item>Kg</item>
+        <item>Quả</item>
+        <item>Hộp</item>
+    </string-array>
+
 </resources>

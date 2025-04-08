@@ -8,15 +8,18 @@ public class FruitModel implements Serializable {
     private String img_url;
     private String description;
     private int quantity;
+
+    private String unit;
     public FruitModel() {
     }
 
-    public FruitModel(String name, String price, String img_url, String description, int quantity) {
+    public FruitModel(String name, String price, String img_url, String description, int quantity,String unit) {
         this.name = name;
         this.price = price;
         this.img_url = img_url;
         this.description = description;
         this.quantity = quantity;
+        this.unit = unit;
     }
 
     public FruitModel(String description, String img_url, String name, String price) {
@@ -64,5 +67,12 @@ public class FruitModel implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

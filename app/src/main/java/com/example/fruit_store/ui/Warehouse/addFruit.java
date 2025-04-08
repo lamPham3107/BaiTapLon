@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +42,9 @@ public class addFruit extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private static final int PICK_IMAGE_REQUEST = 1;
 
+    private Spinner spinnerUnit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,9 @@ public class addFruit extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Fruits_img");
         progressDialog = new ProgressDialog(this);
+
+        spinnerUnit = findViewById(R.id.spinner_unit);
+
 
         // Chọn ảnh từ thư viện
         imgProduct.setOnClickListener(view -> openFileChooser());
@@ -149,6 +156,7 @@ public class addFruit extends AppCompatActivity {
         productMap.put("price", edtPrice.getText().toString().trim());
         productMap.put("quantity", Integer.parseInt(edtQuantity.getText().toString().trim()));
         productMap.put("description", edtDescription.getText().toString().trim());
+        productMap.put("unit", spinnerUnit.getSelectedItem().toString());
 
         firestore.collection("Fruits").document().set(productMap)
                 .addOnCompleteListener(task -> {

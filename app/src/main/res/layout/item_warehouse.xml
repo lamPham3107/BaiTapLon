@@ -24,7 +24,7 @@
         <!-- LinearLayout chứa 3 TextView (Product Name, Price, Quantity) -->
         <LinearLayout
             android:id="@+id/infoContainer"
-            android:layout_width="189dp"
+            android:layout_width="203dp"
             android:layout_height="148dp"
             android:orientation="vertical"
             android:padding="8dp"
@@ -46,17 +46,17 @@
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:gravity="left"
                 android:text="Giá"
-                android:layout_marginTop="30dp"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
                 android:layout_marginTop="30dp"
+                android:gravity="left"
                 android:text="Số lượng"
                 android:textSize="18sp" />
         </LinearLayout>

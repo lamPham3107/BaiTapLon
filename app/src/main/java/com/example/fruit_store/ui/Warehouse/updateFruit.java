@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -35,6 +37,9 @@ public class updateFruit extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String productName;
     private androidx.appcompat.widget.Toolbar toolbar;
+
+    private Spinner spinnerUnit;
+
 
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -79,6 +84,20 @@ public class updateFruit extends AppCompatActivity {
         edtDescription = findViewById(R.id.editreview);
         btnUpdate = findViewById(R.id.btnud);
 
+        spinnerUnit = findViewById(R.id.spinner_unit);
+
+        String productUnit = getIntent().getStringExtra("unit");
+        if (productUnit != null) {
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                    R.array.unit_array, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerUnit.setAdapter(adapter);
+
+            int spinnerPosition = adapter.getPosition(productUnit);
+            spinnerUnit.setSelection(spinnerPosition);
+        }
+
+
         edtName.setText(productName);
         edtPrice.setText(productPrice);
         edtQuantity.setText(productQuantity);
@@ -120,6 +139,7 @@ public class updateFruit extends AppCompatActivity {
         updates.put("price", price);
         updates.put("quantity", quantity);
         updates.put("description", description);
+        updates.put("unit", spinnerUnit.getSelectedItem().toString());
 
         db.collection("Fruits").whereEqualTo("name", productName)
                 .get()
