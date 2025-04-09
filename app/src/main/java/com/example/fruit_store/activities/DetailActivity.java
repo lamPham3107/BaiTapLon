@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
         if(fruitModel != null){
            Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
            txt_description.setText(fruitModel.getDescription());
-           txt_price.setText(fruitModel.getPrice() + " VNĐ/Kg");
+           txt_price.setText(fruitModel.getPrice() + " VNĐ/" + fruitModel.getUnit());
            Max_quantity =fruitModel.getQuantity();
         }
 

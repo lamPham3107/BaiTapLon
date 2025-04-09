@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Thanh Toán "
+            android:textAlignment="center"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -87,6 +88,30 @@
             app:layout_constraintTop_toTopOf="@+id/txt_status" />
 
         <TextView
+            android:id="@+id/txt_cancle_bill"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Hủy Đơn "
+            android:textColor="@color/red_200"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_status" />
+
+
+        <CheckBox
+            android:id="@+id/chb_cancle_bill"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_cancle_bill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_cancle_bill"
+            app:layout_constraintTop_toTopOf="@+id/txt_cancle_bill" />
+
+        <TextView
             android:id="@+id/txt_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +123,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_status" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_cancle_bill" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

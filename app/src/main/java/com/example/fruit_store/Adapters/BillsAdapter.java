@@ -88,6 +88,30 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                 });
             }
         });
+        holder.checkBoxCancleBill.setOnCheckedChangeListener(null);
+        holder.checkBoxCancleBill.setChecked(false);
+        holder.checkBoxCancleBill.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                String billId = bill.getId();
+                firestore.collection("Bills").document(billId)
+                        .delete()
+                        .addOnSuccessListener(aVoid -> {
+                            Log.d("DeleteBill" , "delete: " + billId);
+                            int removedPosition = holder.getAdapterPosition();
+                            if (removedPosition != RecyclerView.NO_POSITION && removedPosition < list_bill.size()) {
+                                list_bill.remove(removedPosition);
+                                notifyItemRemoved(removedPosition);
+                                Toast.makeText(context, "Đã hủy hóa đơn!", Toast.LENGTH_SHORT).show();
+                            }
+                            // phai reload tai cu xoa het cac hóa đơn sau cua hoa don can xoa, nhưng trên firebase lại không xóa.
+                            reloadBillFragment();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(context, "Lỗi khi xóa hóa đơn!", Toast.LENGTH_SHORT).show();
+                            holder.checkBoxCancleBill.setChecked(false); // Bỏ chọn nếu xóa thất bại
+                        });
+            }
+        });
     }
 
     @Override
@@ -97,7 +121,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
 
     public class BillsViewHolder extends RecyclerView.ViewHolder{
         TextView txtBillId, txtBillName, txtBillPhone, txtBillAddress, txtBillPrice, txtInfo;
-        CheckBox checkBoxPayment;
+        CheckBox checkBoxPayment , checkBoxCancleBill;
         public BillsViewHolder(@NonNull View itemView) {
             super(itemView);
             txtBillId = itemView.findViewById(R.id.txt_bill_id);
@@ -107,6 +131,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
             txtBillPrice = itemView.findViewById(R.id.txt_bill_price);
             txtInfo = itemView.findViewById(R.id.txt_info);
             checkBoxPayment = itemView.findViewById(R.id.chb_payment);
+            checkBoxCancleBill = itemView.findViewById(R.id.chb_cancle_bill);
         }
     }
     private void updateFruitStock(List<Map<String, Object>> items, Runnable onSuccess) {
