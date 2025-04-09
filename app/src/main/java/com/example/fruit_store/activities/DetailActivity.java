@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
@@ -107,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
                     added_to_cart();
                 }
                 else{
-                    Toast.makeText(DetailActivity.this , "trong kho khong du " , Toast.LENGTH_SHORT).show();
+                    cant_buy(fruitModel.getName(), Max_quantity,fruitModel.getUnit());
                 }
 
             }
@@ -145,6 +146,13 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    private void cant_buy(String fruit_name , int fruit_quantity, String fruit_unit) {
+        new AlertDialog.Builder(this)
+                .setTitle("Xin lỗi quý khách")
+                .setMessage("Sản phẩm " + fruit_name + " không đủ số lượng trong kho. Số lượng hiện có là " + fruit_quantity + " " + fruit_unit + ".")
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
 
