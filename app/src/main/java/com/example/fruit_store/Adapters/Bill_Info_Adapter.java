@@ -52,7 +52,7 @@ public class Bill_Info_Adapter extends RecyclerView.Adapter<Bill_Info_Adapter.Bi
     }
 
     public static class BillItemViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtQuantity, txtPrice, txtTotal;
+        TextView txtName, txtQuantity, txtPrice, txtTotal ;
 
         public BillItemViewHolder(@NonNull View itemView) {
             super(itemView);

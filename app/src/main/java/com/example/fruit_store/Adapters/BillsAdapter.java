@@ -55,7 +55,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
         holder.txtBillPhone.setText("SĐT: " + bill.getPhone());
         holder.txtBillAddress.setText("Địa chỉ giao hàng: " + bill.getAddress());
         holder.txtBillPrice.setText("Tổng tiền: " + bill.getTotalPrice() + " VNĐ");
-
+        holder.txtTimeBuy.setText(" " + bill.getTime_buy());
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BillInfoActivity.class);
             intent.putExtra("bill_items", (Serializable) bill.getItems());
@@ -120,7 +120,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
     }
 
     public class BillsViewHolder extends RecyclerView.ViewHolder{
-        TextView txtBillId, txtBillName, txtBillPhone, txtBillAddress, txtBillPrice, txtInfo;
+        TextView txtBillId, txtBillName, txtBillPhone, txtBillAddress, txtBillPrice, txtInfo , txtTimeBuy;
         CheckBox checkBoxPayment , checkBoxCancleBill;
         public BillsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,6 +129,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
             txtBillPhone = itemView.findViewById(R.id.txt_bill_phone);
             txtBillAddress = itemView.findViewById(R.id.txt_bill_address);
             txtBillPrice = itemView.findViewById(R.id.txt_bill_price);
+            txtTimeBuy = itemView.findViewById(R.id.txt_time);
             txtInfo = itemView.findViewById(R.id.txt_info);
             checkBoxPayment = itemView.findViewById(R.id.chb_payment);
             checkBoxCancleBill = itemView.findViewById(R.id.chb_cancle_bill);

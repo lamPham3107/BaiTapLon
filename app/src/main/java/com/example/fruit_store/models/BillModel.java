@@ -11,17 +11,27 @@ public class BillModel implements Serializable {
     private String address;
     private Double totalPrice;
     private List<Map<String, Object>> items;
+    private String time_buy;
 
     public BillModel() {
     }
 
-    public BillModel(String id, String name, String phone, String address, Double totalPrice, List<Map<String, Object>> items) {
+    public BillModel(String id, String name, String phone, String address, Double totalPrice, List<Map<String, Object>> items, String time_buy) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.totalPrice = totalPrice;
         this.items = items;
+        this.time_buy = time_buy;
+    }
+
+    public String getTime_buy() {
+        return time_buy;
+    }
+
+    public void setTime_buy(String time_buy) {
+        this.time_buy = time_buy;
     }
 
     public String getId() {

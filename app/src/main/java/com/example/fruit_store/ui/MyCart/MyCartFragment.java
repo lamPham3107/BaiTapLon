@@ -39,9 +39,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -56,7 +59,7 @@ public class MyCartFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView overTotalAmount;
     private Button bt_buy;
-    private String name , phone , address;
+    private String name , phone , address , time_buy;
     private Double totalPrice = 0.0;
 
     public MyCartFragment() {
@@ -82,7 +85,7 @@ public class MyCartFragment extends Fragment {
         overTotalAmount = root.findViewById(R.id.txt_totalprice);
 
         myCartModelList = new ArrayList<>();
-        myCartAdapter = new MyCartAdapter(getActivity() , myCartModelList);
+        myCartAdapter = new MyCartAdapter(getActivity() , myCartModelList , overTotalAmount);
         rcv_my_cart.setAdapter(myCartAdapter);
 
         if (auth.getCurrentUser() != null) {
@@ -113,13 +116,34 @@ public class MyCartFragment extends Fragment {
         bt_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( getContext(), ThanksActivity.class);
-                updateToBills();
-                intent.putExtra("fruitList" ,(Serializable) myCartModelList);
+                if(myCartModelList.isEmpty()){
+                    new android.app.AlertDialog.Builder(getContext())
+                            .setTitle("Giỏ hàng trống")
+                            .setMessage("Bạn chưa có sản phẩm nào trong giỏ hàng!")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
+                }
+                else{
+                    // Nếu giỏ hàng không trống, hiển thị thông báo xác nhận mua hàng
+                    new android.app.AlertDialog.Builder(getContext())
+                            .setTitle("Xác nhận mua hàng")
+                            .setMessage("Bạn có chắc chắn muốn mua tất cả sản phẩm trong giỏ hàng?")
+                            .setPositiveButton("Mua", (dialog, which) -> {
+                                // Khi người dùng xác nhận mua
+                                Intent intent = new Intent(getContext(), ThanksActivity.class);
+                                updateToBills();
+                                getTime();
+                                intent.putExtra("fruitList", (Serializable) myCartModelList);
+                                startActivity(intent);
+                            })
+                            .setNegativeButton("Hủy", null)
+                            .show();
+                }
 
-                startActivity(intent);
             }
         });
+
 
         return root;
     }
@@ -207,19 +231,28 @@ public class MyCartFragment extends Fragment {
                     }
 
                     // Tạo BillModel với ID mới
-                    BillModel bill = new BillModel(newBillId, name, phone, address, totalPrice, items);
+                    BillModel bill = new BillModel(newBillId, name, phone, address, totalPrice, items , time_buy);
 
                     firestore.collection("Bills").document(newBillId)
                             .set(bill)
                             .addOnSuccessListener(unused ->{
-                                Log.d("Firestore", "Bill added successfully");
-                                deleteAllCart();
-                                }
+                                        Log.d("Firestore", "Bill added successfully");
+                                        deleteAllCart();
+                                    }
                             )
                             .addOnFailureListener(e -> Log.e("Firestore", "Lỗi khi thêm bill: " + e.getMessage()));
                 })
                 .addOnFailureListener(e -> Log.e("Firestore", "Lỗi lấy ID bill: " + e.getMessage()));
     }
 
-
+    public void getTime(){
+        String saveCurrentDate, saveCurrentTime;
+        Calendar calForDate = Calendar.getInstance();
+        // dd la ngay trong thang , MM la thang , DD la ngay trong nam , mm la phut
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy" , Locale.getDefault());
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+        time_buy = saveCurrentDate + " " + saveCurrentTime;
+    }
 }

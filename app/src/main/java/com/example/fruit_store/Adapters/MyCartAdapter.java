@@ -26,7 +26,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder> {
     private Context context;
@@ -34,13 +37,14 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
     private MyCartFragment myCartFragment;
+    private TextView overTotalAmount;
 
-
-    public MyCartAdapter(Context context, List<MyCartModel> myCartModelList) {
+    public MyCartAdapter(Context context, List<MyCartModel> myCartModelList , TextView overTotalAmount) {
         this.context = context;
         this.myCartModelList = myCartModelList;
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+        this.overTotalAmount = overTotalAmount;
     }
 
     @NonNull
@@ -55,8 +59,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
 
         holder.name.setText(myCartModelList.get(position).getFruitName());
         holder.price.setText(myCartModelList.get(position).getFruitPrice());
-        holder.date.setText(myCartModelList.get(position).getCurrentDate());
-        holder.time.setText(myCartModelList.get(position).getCurrentTime());
+
         holder.quantity.setText(String.valueOf(myCartModelList.get(position).getTotalQuantity()));
         holder.total_price.setText(String.valueOf(myCartModelList.get(position).getTotalPrice()));
 
@@ -74,6 +77,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
                                 if(task.isSuccessful()){
                                     myCartModelList.remove(myCartModelList.get(pos));
                                     notifyDataSetChanged();
+                                    updateTotalAmount();
                                     FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                                     MyCartFragment myCartFragment = (MyCartFragment) fragmentManager.findFragmentByTag("MY_CART_FRAGMENT_TAG");
                                     if (myCartFragment != null) {
@@ -106,11 +110,18 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txt_cart_fruitName);
             price = (TextView) itemView.findViewById(R.id.txt_cart_price);
-            date = (TextView) itemView.findViewById(R.id.txt_cart_current_date);
-            time = (TextView) itemView.findViewById(R.id.txt_cart_current_time);
             quantity = (TextView) itemView.findViewById(R.id.txt_cart_total_quantity);
             total_price = (TextView) itemView.findViewById(R.id.txt_cart_total_price);
             img_delete = (ImageView) itemView.findViewById(R.id.img_delete);
         }
     }
+
+    private void updateTotalAmount() {
+        double totalAmount = 0.0;
+        for (MyCartModel myCartModel : myCartModelList) {
+            totalAmount += myCartModel.getTotalPrice();
+        }
+        overTotalAmount.setText("Tổng tiền: " + totalAmount + " VNĐ");
+    }
+
 }

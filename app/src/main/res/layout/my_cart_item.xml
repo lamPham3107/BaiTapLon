@@ -59,50 +59,50 @@
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mua Ngày"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
-            <TextView
-                android:id="@+id/txt_cart_current_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="Current Date"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mua Lúc"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
-            <TextView
-                android:id="@+id/txt_cart_current_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="current time"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
-        </LinearLayout>
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="2">-->
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:text="Mua Ngày"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:fontFamily="sans-serif"/>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/txt_cart_current_date"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:text="Current Date"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:fontFamily="sans-serif"/>-->
+        <!--        </LinearLayout>-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="2">-->
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:text="Mua Lúc"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:fontFamily="sans-serif"/>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/txt_cart_current_time"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:text="current time"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:fontFamily="sans-serif"/>-->
+        <!--        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

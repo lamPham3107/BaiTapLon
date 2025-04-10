@@ -85,12 +85,12 @@ public class BillFragment extends Fragment {
                                     String address = doc.getString("address");
                                     Double totalPrice = doc.getDouble("totalPrice");
                                     List<Map<String, Object>> items = (List<Map<String, Object>>) doc.get("items");
-
+                                    String time_buy = doc.getString("time_buy");
                                     if (items == null) {
                                         items = new ArrayList<>();
                                     }
 
-                                    BillModel bill_info = new BillModel(id, name, phone, address, totalPrice, items);
+                                    BillModel bill_info = new BillModel(id, name, phone, address, totalPrice, items,time_buy);
                                     list_bill.add(bill_info);
                                 } catch (Exception e) {
                                     Log.e("Firestore", "Lỗi khi chuyển đổi dữ liệu hóa đơn: " + e.getMessage());
