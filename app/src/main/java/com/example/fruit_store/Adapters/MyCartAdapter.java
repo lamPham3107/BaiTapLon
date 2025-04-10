@@ -18,6 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fruit_store.R;
+import com.example.fruit_store.models.FruitModel;
 import com.example.fruit_store.models.MyCartModel;
 import com.example.fruit_store.ui.MyCart.MyCartFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +40,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     private MyCartFragment myCartFragment;
     private TextView overTotalAmount;
 
+
     public MyCartAdapter(Context context, List<MyCartModel> myCartModelList , TextView overTotalAmount) {
         this.context = context;
         this.myCartModelList = myCartModelList;
@@ -58,7 +60,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.name.setText(myCartModelList.get(position).getFruitName());
-        holder.price.setText(myCartModelList.get(position).getFruitPrice());
+        holder.price.setText(myCartModelList.get(position).getFruitPrice() );
 
         holder.quantity.setText(String.valueOf(myCartModelList.get(position).getTotalQuantity()));
         holder.total_price.setText(String.valueOf(myCartModelList.get(position).getTotalPrice()));

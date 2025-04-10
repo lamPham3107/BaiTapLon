@@ -67,6 +67,7 @@ public class updateFruit extends AppCompatActivity {
         String productQuantity = getIntent().getStringExtra("quantity");
         String productDescription = getIntent().getStringExtra("description");
         String productImage = getIntent().getStringExtra("img_url");
+        String unit = getIntent().getStringExtra("unit");
 
         if (productName == null) {
             Toast.makeText(this, "Lỗi: Không tìm thấy sản phẩm!", Toast.LENGTH_SHORT).show();
@@ -83,21 +84,18 @@ public class updateFruit extends AppCompatActivity {
         edtQuantity = findViewById(R.id.editquantity);
         edtDescription = findViewById(R.id.editreview);
         btnUpdate = findViewById(R.id.btnud);
-
         spinnerUnit = findViewById(R.id.spinner_unit);
 
-        String productUnit = getIntent().getStringExtra("unit");
-        if (productUnit != null) {
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.unit_array, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerUnit.setAdapter(adapter);
 
-            int spinnerPosition = adapter.getPosition(productUnit);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.unit_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(adapter);
+
+        if (unit != null) {
+            int spinnerPosition = adapter.getPosition(unit);
             spinnerUnit.setSelection(spinnerPosition);
         }
-
-
         edtName.setText(productName);
         edtPrice.setText(productPrice);
         edtQuantity.setText(productQuantity);
@@ -124,6 +122,8 @@ public class updateFruit extends AppCompatActivity {
         String price = edtPrice.getText().toString().trim();
         int quantity = Integer.parseInt(edtQuantity.getText().toString().trim());
         String description = edtDescription.getText().toString().trim();
+        String unit = spinnerUnit.getSelectedItem().toString();
+
 
         if (name.isEmpty() || price.isEmpty() || edtQuantity.getText().toString().trim().isEmpty() || description.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
@@ -139,7 +139,7 @@ public class updateFruit extends AppCompatActivity {
         updates.put("price", price);
         updates.put("quantity", quantity);
         updates.put("description", description);
-        updates.put("unit", spinnerUnit.getSelectedItem().toString());
+        updates.put("unit", unit);
 
         db.collection("Fruits").whereEqualTo("name", productName)
                 .get()
