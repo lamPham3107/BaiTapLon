@@ -48,12 +48,9 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         searchBox = root.findViewById(R.id.search_box);
         bt_go_to_cart = root.findViewById(R.id.btn_go_to_cart);
-
         progressBar = root.findViewById(R.id.home_progressbar);
         progressBar.setVisibility(View.VISIBLE);
-
         filteredList = new ArrayList<>();
-
         recyclerView_fruit = root.findViewById(R.id.fruit_recyclerView);
         recyclerView_fruit.setVisibility(View.GONE);
         recyclerView_fruit.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -102,8 +99,6 @@ public class HomeFragment extends Fragment {
             }
         });
         bt_go_to_cart.setOnClickListener(v -> reloadCartFragment());
-
-
 
         return root;
     }

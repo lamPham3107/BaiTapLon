@@ -30,7 +30,7 @@ public class FruitAdapters extends RecyclerView.Adapter<FruitAdapters.FruitViewH
             Color.parseColor("#FFECB3"), // Vàng nhạt
             Color.parseColor("#D1C4E9")  // Tím nhạt
     };
-    private Random random = new Random();
+
 
     public FruitAdapters(Context context, List<FruitModel> fruitsList) {
         this.context = context;

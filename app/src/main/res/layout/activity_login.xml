@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_background"
         android:padding="13dp"
+        android:paddingEnd="80dp"
         android:elevation="3dp"
         app:layout_constraintWidth_percent=".8"
         android:hint="Password"
@@ -49,8 +50,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email_login"
         android:drawableLeft="@drawable/keylog"
-        android:drawablePadding="10dp"
-        />
+        android:drawablePadding="10dp" />
+
+    <ImageView
+        android:id="@+id/iv_toggle_password"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Toggle password visibility"
+        android:src="@drawable/eye"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@+id/txt_password_login"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_password_login"
+        app:layout_constraintEnd_toEndOf="@+id/txt_password_login"
+        android:elevation="5dp"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:focusable="true"/>
     <Button
         android:id="@+id/bt_sign_in"
         android:layout_width="150dp"

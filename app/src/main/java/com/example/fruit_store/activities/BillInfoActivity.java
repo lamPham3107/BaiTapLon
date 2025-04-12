@@ -36,7 +36,7 @@ public class BillInfoActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
 
-        // Nhận dữ liệu từ Intent
+        // Nhận dữ liệu từ Intent ở billsAdapter
         billItems = (List<Map<String, Object>>) getIntent().getSerializableExtra("bill_items");
         double totalPrice = getIntent().getDoubleExtra("total_price", 0);
 

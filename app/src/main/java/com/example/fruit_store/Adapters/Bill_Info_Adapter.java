@@ -35,6 +35,7 @@ public class Bill_Info_Adapter extends RecyclerView.Adapter<Bill_Info_Adapter.Bi
 
         String name = (String) item.get("fruitName");
         Number totalQuantityObj = (Number) item.get("totalQuantity");
+        // neu totalQuantityObj != null thi lay gia tri = 0
         int totalQuantity = totalQuantityObj != null ? totalQuantityObj.intValue() : 0;
         String price = (String) item.get("fruitPrice");
         Number totalPriceObj = (Number) item.get("totalPrice");

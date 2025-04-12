@@ -2,12 +2,14 @@ package com.example.fruit_store.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+
+    private ImageView iv_toggle_password;
+    private boolean isPasswordVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,24 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        iv_toggle_password = findViewById(R.id.iv_toggle_password);
+        iv_toggle_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPasswordVisible) {
+                    // Ẩn mật khẩu
+                    txt_password_login.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    iv_toggle_password.setImageResource(R.drawable.eye); // icon mắt đóng
+                } else {
+                    // Hiện mật khẩu
+                    txt_password_login.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    iv_toggle_password.setImageResource(R.drawable.hidden); // icon mắt mở
+                }
+                isPasswordVisible = !isPasswordVisible;
+                txt_password_login.setSelection(txt_password_login.getText().length()); // đưa con trỏ về cuối
+            }
+        });
+
     }
     private void hideKeyboard() {
         View view = this.getCurrentFocus();
@@ -107,7 +130,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else{
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                            String error = task.getException() != null ? task.getException().getMessage() : "Đăng nhập thất bại";
+                            Toast.makeText(LoginActivity.this, "Vui lòng kiểm tra lại thông tin tài khoản", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });

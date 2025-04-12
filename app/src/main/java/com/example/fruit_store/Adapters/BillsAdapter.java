@@ -56,12 +56,14 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
         holder.txtBillAddress.setText("Địa chỉ giao hàng: " + bill.getAddress());
         holder.txtBillPrice.setText("Tổng tiền: " + bill.getTotalPrice() + " VNĐ");
         holder.txtTimeBuy.setText(" " + bill.getTime_buy());
+        // Tạo intent để truyền dữ liệu chi tiết hóa đơn vào billInfoActivity
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BillInfoActivity.class);
             intent.putExtra("bill_items", (Serializable) bill.getItems());
             intent.putExtra("total_price", bill.getTotalPrice());
             context.startActivity(intent);
         });
+        // Xử lý CheckBox thanh toán
         holder.checkBoxPayment.setOnCheckedChangeListener(null);
         holder.checkBoxPayment.setChecked(false);
         holder.checkBoxPayment.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -88,6 +90,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                 });
             }
         });
+        // Xử lý CheckBox hủy hóa đơn
         holder.checkBoxCancleBill.setOnCheckedChangeListener(null);
         holder.checkBoxCancleBill.setChecked(false);
         holder.checkBoxCancleBill.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -103,7 +106,6 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                                 notifyItemRemoved(removedPosition);
                                 Toast.makeText(context, "Đã hủy hóa đơn!", Toast.LENGTH_SHORT).show();
                             }
-                            // phai reload tai cu xoa het cac hóa đơn sau cua hoa don can xoa, nhưng trên firebase lại không xóa.
                             reloadBillFragment();
                         })
                         .addOnFailureListener(e -> {
@@ -135,6 +137,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
             checkBoxCancleBill = itemView.findViewById(R.id.chb_cancle_bill);
         }
     }
+    // Cập nhật tồn kho trái cây
     private void updateFruitStock(List<Map<String, Object>> items, Runnable onSuccess) {
         for (Map<String, Object> item : items) {
             String fruitName = (String) item.get("fruitName");
@@ -173,6 +176,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
                     .addOnFailureListener(e -> Log.e("UpdateStock", "Lỗi truy vấn sản phẩm: " + e.getMessage()));
         }
     }
+    // Reload lại BillFragment
     private void reloadBillFragment() {
         if (context instanceof androidx.fragment.app.FragmentActivity) {
             androidx.fragment.app.FragmentActivity activity = (androidx.fragment.app.FragmentActivity) context;
