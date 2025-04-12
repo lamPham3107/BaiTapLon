@@ -49,9 +49,11 @@ public class DetailActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
     @Override
+    //Hàm khởi tạo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        //Khởi tạo các biến và liên kết với XML
         setContentView(R.layout.activity_detail);
 
         detailImg = (ImageView) findViewById(R.id.detail_img);
@@ -77,18 +79,19 @@ public class DetailActivity extends AppCompatActivity {
         if(object instanceof FruitModel){
             fruitModel = (FruitModel) object;
         }
+        //Hiển thị thông tin sản phẩm lên giao diện
         if(fruitModel != null){
-           Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
-           txt_description.setText(fruitModel.getDescription());
-           txt_price.setText(fruitModel.getPrice() + " VNĐ/" + fruitModel.getUnit());
-           Max_quantity =fruitModel.getQuantity();
+            Glide.with(getApplicationContext()).load(fruitModel.getImg_url()).into(detailImg);
+            txt_description.setText(fruitModel.getDescription());
+            txt_price.setText(fruitModel.getPrice() + " VNĐ/" + fruitModel.getUnit());
+            Max_quantity =fruitModel.getQuantity();
         }
-
+        //Thay đổi giá trị số lượng sản phẩm khi nhấn nút cộng hoặc trừ
         img_addFruit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    total_quantity++;
-                    txt_quantity.setText(String.valueOf(total_quantity));
+                total_quantity++;
+                txt_quantity.setText(String.valueOf(total_quantity));
             }
         });
         img_removeFruit.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +103,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
+        //Xử lí nút Thêm sản phẩm vào giỏ hàng
         bt_addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +119,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
     }
-
+    //Hàm thêm sản phẩm vào giỏ hàng
     private void added_to_cart() {
         String saveCurrentDate, saveCurrentTime;
         Calendar calForDate = Calendar.getInstance();
@@ -130,6 +134,7 @@ public class DetailActivity extends AppCompatActivity {
         // bang bam chua du lieu cac thuoc tinh cua fruitModel
         final HashMap<String , Object> cartMap = new HashMap<>();
 
+        //Thêm dữ liệu vào Firestore
         cartMap.put("fruitName", fruitModel.getName());
         cartMap.put("fruitPrice", txt_price.getText().toString());
         cartMap.put("currentDate", saveCurrentDate);
@@ -139,18 +144,21 @@ public class DetailActivity extends AppCompatActivity {
 
         // day du lieu cua bang bam len firebase firestore
         firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
-                .collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        finish();
-                    }
-                });
+                .collection("AddToCart").add(cartMap).addOnCompleteListener(
+                        new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                finish();
+                            }
+                        });
 
     }
+    //Hàm hiển thị thông báo khi không đủ số lượng sản phẩm trong kho
     private void cant_buy(String fruit_name , int fruit_quantity, String fruit_unit) {
         new AlertDialog.Builder(this)
                 .setTitle("Xin lỗi quý khách")
-                .setMessage("Sản phẩm " + fruit_name + " không đủ số lượng trong kho. Số lượng hiện có là " + fruit_quantity + " " + fruit_unit + ".")
+                .setMessage("Sản phẩm " + fruit_name + " không đủ số lượng trong kho. " +
+                        "Số lượng hiện có là " + fruit_quantity + " " + fruit_unit + ".")
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }
