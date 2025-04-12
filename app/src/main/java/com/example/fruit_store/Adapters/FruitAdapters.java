@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fruit_store.R;
+import com.example.fruit_store.activities.DetailActivity;
 import com.example.fruit_store.models.FruitModel;
 
 import java.util.List;

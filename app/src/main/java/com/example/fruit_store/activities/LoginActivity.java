@@ -137,4 +137,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void test() {
+        // Test code here
+        // This is just a placeholder for your test code
+        Toast.makeText(this, "Test code executed", Toast.LENGTH_SHORT).show();
+    }
 }
