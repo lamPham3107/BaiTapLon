@@ -162,6 +162,10 @@ public class DetailActivity extends AppCompatActivity {
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+    private void test() {
+        // Test code here
+        Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
+    }
 
 
 }
