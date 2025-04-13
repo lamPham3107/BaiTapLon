@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -82,6 +84,16 @@ public class addFruit extends AppCompatActivity {
         btnAddProduct.setOnClickListener(view -> {
             if (validateInputs()) {
                 uploadImageToFirebase();
+            }
+        });
+
+        // Ẩn bàn phím khi chạm ra ngoài EditText
+        View rootView = findViewById(android.R.id.content);
+        rootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
             }
         });
     }
@@ -173,5 +185,16 @@ public class addFruit extends AppCompatActivity {
                         Toast.makeText(addFruit.this, "Lỗi khi thêm sản phẩm!", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus(); // Lấy view hiện đang có focus (được chọn).
+        if (view != null) { // Nếu có một view đang được focus
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            // Lấy đối tượng quản lý bàn phím (InputMethodManager)
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            // Ẩn bàn phím, sử dụng token của view đang focus để xác định "cửa sổ" cần ẩn bàn phím khỏi đó.
+        }
     }
 }

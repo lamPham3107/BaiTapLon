@@ -109,7 +109,7 @@ public class updateFruit extends AppCompatActivity {
 
         imgUpdate.setOnClickListener(v -> openImagePicker());
         btnUpdate.setOnClickListener(v -> updateProduct());
-        
+
         // Ẩn bàn phím khi chạm ra ngoài EditText
         View rootView = findViewById(android.R.id.content);
         rootView.setOnTouchListener(new View.OnTouchListener() {
