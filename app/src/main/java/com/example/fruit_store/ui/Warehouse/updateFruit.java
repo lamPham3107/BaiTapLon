@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,14 +56,11 @@ public class updateFruit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_fruit);
-
         toolbar = findViewById(R.id.add_toolbar);
-
         // bat nut back
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-
         // Nhận dữ liệu từ Intent
         productName = getIntent().getStringExtra("name");
         String productPrice = getIntent().getStringExtra("price");
@@ -109,6 +109,17 @@ public class updateFruit extends AppCompatActivity {
 
         imgUpdate.setOnClickListener(v -> openImagePicker());
         btnUpdate.setOnClickListener(v -> updateProduct());
+        
+        // Ẩn bàn phím khi chạm ra ngoài EditText
+        View rootView = findViewById(android.R.id.content);
+        rootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
+
     }
 
     private void openImagePicker() {
@@ -141,6 +152,7 @@ public class updateFruit extends AppCompatActivity {
         updates.put("description", description);
         updates.put("unit", unit);
 
+        // Cập nhật thông tin sản phẩm trong Firestore
         db.collection("Fruits").whereEqualTo("name", productName)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -195,4 +207,16 @@ public class updateFruit extends AppCompatActivity {
             Toast.makeText(updateFruit.this, "Lỗi khi tải ảnh!", Toast.LENGTH_SHORT).show();
         });
     }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus(); // Lấy view hiện đang có focus (được chọn).
+        if (view != null) { // Nếu có một view đang được focus
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            // Lấy đối tượng quản lý bàn phím (InputMethodManager)
+
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            // Ẩn bàn phím, sử dụng token của view đang focus để xác định "cửa sổ" cần ẩn bàn phím khỏi đó.
+        }
+    }
+
 }

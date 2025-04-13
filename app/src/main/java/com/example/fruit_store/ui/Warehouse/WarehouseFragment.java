@@ -67,13 +67,10 @@ public class WarehouseFragment extends Fragment {
         warehouseAdapter = new WarehouseAdapter(getActivity(), filteredList, updateLauncher);
         recyclerView_Warehouse.setAdapter(warehouseAdapter);
 
-
         searchBox = root.findViewById(R.id.search);
         // Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
-
-
 
         // Button thêm sản phẩm
         btnAdd = root.findViewById(R.id.btnadd);
@@ -121,7 +118,6 @@ public class WarehouseFragment extends Fragment {
                 return true;
             }
         });
-
         // Load danh sách sản phẩm từ Firestore
         loadProductList();
         return root;

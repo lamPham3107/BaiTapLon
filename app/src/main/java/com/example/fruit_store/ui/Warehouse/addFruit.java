@@ -125,7 +125,6 @@ public class addFruit extends AppCompatActivity {
             }
         }
     }
-
     // Upload ảnh lên Firebase Storage
     private void uploadImageToFirebase() {
         progressDialog.setMessage("Đang tải ảnh...");
