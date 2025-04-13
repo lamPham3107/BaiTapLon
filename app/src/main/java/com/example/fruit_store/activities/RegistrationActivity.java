@@ -3,6 +3,7 @@ package com.example.fruit_store.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -93,6 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String userPhoneNumber = txt_Phone_Number.getText().toString();
         String userAddress = txt_Address.getText().toString();
         String userRole = "user";
+
         if(TextUtils.isEmpty(userName)){
             Toast.makeText(this, "Họ tên đang rỗng", Toast.LENGTH_SHORT).show();
             return;
@@ -117,24 +119,35 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Password phải nhiều hơn 5 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
-        auth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isComplete()){
 
-                    UserModel userModel = new UserModel(userName,userEmail,userPassword,userPhoneNumber,userAddress,userRole);
-                    String id = task.getResult().getUser().getUid();
-                    database.getReference().child("Users").child(id).setValue(userModel);
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(RegistrationActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(RegistrationActivity.this,"Error" + task.getException(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        auth.createUserWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.GONE);
+                        if(task.isSuccessful()){
+                            UserModel userModel = new UserModel(userName,userEmail,userPassword,userPhoneNumber,userAddress,userRole);
+                            String id = task.getResult().getUser().getUid();
+                            database.getReference().child("Users").child(id).setValue(userModel);
+                            Toast.makeText(RegistrationActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+
+                            String errorMessage = "Lỗi: ";
+                            if (task.getException() != null) {
+                                String exceptionMessage = task.getException().getMessage();
+                                if (exceptionMessage != null && exceptionMessage.contains("The email address is already in use")) {
+                                    errorMessage = "Email này đã được đăng ký.";
+                                } else {
+                                    errorMessage += exceptionMessage;
+                                }
+                            }
+                            Toast.makeText(RegistrationActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
+
     private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
