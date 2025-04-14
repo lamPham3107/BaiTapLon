@@ -125,5 +125,10 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         }
         overTotalAmount.setText("Tổng tiền: " + totalAmount + " VNĐ");
     }
+    private void sendDataToFragment() {
+        Intent intent = new Intent("MyCartFragment");
+        intent.putExtra("totalAmount", overTotalAmount.getText().toString());
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
 
 }
