@@ -55,7 +55,7 @@ public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.BillsViewHol
         holder.txtBillPhone.setText("SĐT: " + bill.getPhone());
         holder.txtBillAddress.setText("Địa chỉ giao hàng: " + bill.getAddress());
         holder.txtBillPrice.setText("Tổng tiền: " + bill.getTotalPrice() + " VNĐ");
-        holder.txtTimeBuy.setText(" " + bill.getTime_buy());
+        holder.txtTimeBuy.setText("Mua lúc: " + bill.getTime_buy());
         // Tạo intent để truyền dữ liệu chi tiết hóa đơn vào billInfoActivity
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BillInfoActivity.class);
