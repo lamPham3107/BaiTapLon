@@ -255,4 +255,9 @@ public class MyCartFragment extends Fragment {
         saveCurrentTime = currentTime.format(calForDate.getTime());
         time_buy = saveCurrentDate + " " + saveCurrentTime;
     }
+    private void sendBroadcast() {
+        Intent intent = new Intent("MyBroadcast");
+        intent.putExtra("totalPrice", totalPrice);
+        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+    }
 }
