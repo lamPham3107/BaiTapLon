@@ -31,4 +31,10 @@ public class WelcomeActivity extends AppCompatActivity {
     public void registration(View view) {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
+    private void checkUser() {
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+            finish();
+        }
+    }
 }
