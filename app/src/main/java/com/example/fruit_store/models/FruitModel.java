@@ -9,6 +9,8 @@ public class FruitModel implements Serializable {
     private String description;
     private int quantity;
 
+
+
     private String unit;
     public FruitModel() {
     }
